@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Genshin Who</title>
+</head>
+<body>
+    <div class="container">
+        <div class="container center">
+            <div class="row" style="padding-top: 3%; font-weight: bolder; font-size: 50px;" id="titulo" ><h1>Genshin Who</h1></div>
+            <div class="row" style="padding-top: 20px; font-family: 'Roboto';"><a class="button" href="game.html">New Game</a></div>
+            <div class="row" style="padding-top: 20px;"><a class="button" id="entergame">Enter Game</a></div>
+            <div class="row" style="padding-top: 20px;" id="entergane_input">
+                <div>
+                    <label for="code">Character Code</label>
+                    <input name="code" id="code" type="text" value=""/>
+                </div>
+                <div>
+                    <label for="cards">Deck code<code></code></label>
+                    <input name="cards" id="cards" type="text" value=""/>
+                </div>
+                <button type="send" id="entergame-send">Send</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+    $("#entergane_input").hide();
+
+    $("#entergame").click(function(){
+        $("#entergane_input").show();
+    });
+
+    $("#entergame-send").click(function(){
+       var code = $("#code").val();
+       var cards = $("#cards").val();
+
+       var url = "game.html?code="+code+"&card="+cards;
+
+       window.location.replace(url); 
+    });
+
+
+});
+</script>

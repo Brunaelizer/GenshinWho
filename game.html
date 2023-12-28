@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <div class="container">
+        <div class="table center">
+            <div id="navbar">
+            </div>
+            <div id="game-table">
+                
+            </div>
+            <div id="selected_card_container">
+                <div id="selected_card" class="card">
+                </div>
+                
+            <div>
+
+            </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    $(document).ready(function(){
+        let characters_list = [
+            {"id" : "1","name" : "Albedo", "code" : "0b3bbcaea343c7b15746449b7770914e","type":"Geo"},
+            {"id" : "2","name" : "Alhaitham", "code" : "fe1798ca1b81a06357bfaadc660f59d1","type":"Dendro"},
+            {"id" : "3","name" : "Amber", "code" : "a3957517aa47ba34a666859376af6d92","type":"Pyro"},
+            {"id" : "4","name" : "Itto", "code" : "4b6b8fd780eec80dff805f154c97b4dc","type":"Geo"},
+            {"id" : "5","name" : "Baizhu", "code" : "0b394e4015d5493491608f86e00ca084","type":"Dendro"},
+            {"id" : "6","name" : "Barbara", "code" : "98e2b698a6d0dc8d4e06003b12229329","type":"Hydro"},
+            {"id" : "7","name" : "Beidou", "code" : "61e6a75f166bb76a4a994a16bd9889d7","type":"Electro"},
+            {"id" : "8","name" : "Bennett", "code" : "075ee5586903153637d7d6639cd72954","type":"Pyro"},
+            {"id" : "9","name" : "Candace", "code" : "2f54d5d026c5405b3ce9ead18652a1cb","type":"Hydro"},
+            {"id" : "10","name" : "Charlotte", "code" : "e731690f85464c925e49691434214fb4","type":"Cryo"},
+            {"id" : "11","name" : "Chongyun", "code" : "76b566c76fa63b28adac1ff956d5bbd2","type":"Cryo"},
+            {"id" : "12","name" : "Collei", "code" : "7a549e342d15660786162b85fe827b7f","type":"Dendro"},
+            {"id" : "13","name" : "Cyno", "code" : "cd58cd1c479d6d54422a49d31bc2272e","type":"Electro"},
+            {"id" : "14","name" : "Dehya", "code" : "629d006b07369059548ba36db8873e7c","type":"Pyro"},
+            {"id" : "15","name" : "Diluc", "code" : "c2b37d3b87e7643becba8b8b03f5ca2a","type":"Pyro"},
+            {"id" : "16","name" : "Diona", "code" : "df2eee73204217ef4cc7d898aac374b7","type":"Cryo"},
+            {"id" : "17","name" : "Dori", "code" : "0472d8218b6fc23eec25db6018b3ae99","type":"Electro"},
+            {"id" : "18","name" : "Eula", "code" : "7af6ad724b6b8d1233fefe87fdebecca","type":"Cryo"},
+            {"id" : "19","name" : "Faruzan", "code" : "89a9526d3ac7c9bc4ad59d82bc9547e1","type":"Anemo"},
+            {"id" : "20","name" : "Fischl", "code" : "c038606d6b7488925e5843893063462a","type":"Electro"},
+            {"id" : "21","name" : "Freminet", "code" : "094fd3a1ac7ecf4766aa768aa18af29c","type":"Cryo"},
+            {"id" : "22","name" : "Furina", "code" : "e504eababef75b3bdf19fbd472e443d9","type":"Hydro"},
+            {"id" : "23","name" : "Ganyu", "code" : "d2e0cad90e0a099c80ce9d054446a7a5","type":"Cryo"},
+            {"id" : "24","name" : "Gorou", "code" : "c9b2116c4f3fcc2a56e11b2fb287230d","type":"Geo"},
+            {"id" : "25","name" : "Hu Tao", "code" : "6a59657a055a1d26dd560402d2ad1f45","type":"Pyro"},
+            {"id" : "26","name" : "Jean", "code" : "32c6f175d52798ff29ef670b0e17b85b","type":"Anemo"},
+            {"id" : "27","name" : "Kazuha", "code" : "16287abe472a7f48b218b6665226624b","type":"Anemo"},
+            {"id" : "28","name" : "Kaeya", "code" : "a17a2af5f0d16afd5823267e2082f1ef","type":"Cryo"},
+            {"id" : "29","name" : "Ayaka", "code" : "8bffe6162dd754894834bbf59a357dbe","type":"Cryo"},
+            {"id" : "30","name" : "Ayato", "code" : "ae3f4b99b7e93172d56de12ab59a1deb","type":"Hydro"},
+            {"id" : "31","name" : "Kaveh", "code" : "7384059eee97428b7290d03dcc47e70c","type":"Dendro"},
+            {"id" : "32","name" : "Keqing", "code" : "60e21c3731be5eef1c1b8a5d95b804c1","type":"Electro"},
+            {"id" : "33","name" : "Kirara", "code" : "6e0424204160e432625f081498be3f55","type":"Dendro"},
+            {"id" : "34","name" : "Klee", "code" : "c09a45bcc1b4a0d310cb8325199c7e78","type":"Pyro"},
+            {"id" : "35","name" : "Sara", "code" : "416f816ecf0d693b7f22dd47a150694a","type":"Electro"},
+            {"id" : "36","name" : "Shinobu", "code" : "14a6cbae5edb5dd841f4ee8846e38601","type":"Electro"},
+            {"id" : "37","name" : "Layla", "code" : "b7694838f3ccfecfed8c267b742df5a5","type":"Cryo"},
+            {"id" : "38","name" : "Lisa", "code" : "2bbe83928176488f1619708dc53c203a","type":"Electro"},
+            {"id" : "39","name" : "Lynette", "code" : "df097f444e5afea41713067487f4635a","type":"Anemo"},
+            {"id" : "40","name" : "Lyney", "code" : "01fc14175f7c9dc5e7026108a4f47c65","type":"Pyro"},
+            {"id" : "41","name" : "Mika", "code" : "f18b679cfafdb77e93c82ac80ec6c05c","type":"Cryo"},
+            {"id" : "42","name" : "Mona", "code" : "de18c2acbfd13773ffc50bdbf561809b","type":"Hydro"},
+            {"id" : "43","name" : "Nahida", "code" : "653928d9dc5d7257294b868c2da2293c","type":"Dendro"},
+            {"id" : "44","name" : "Navia", "code" : "500e5c3b3af9df36e7c6d0a10761a3ed","type":"Geo"},
+            {"id" : "45","name" : "Neuvillette", "code" : "abc373bc92dbc50aa639115eb9fcac3f","type":"Hydro"},
+            {"id" : "46","name" : "Nilou", "code" : "058a9feca4174b8ce6b6c03184780b4a","type":"Hydro"},
+            {"id" : "47","name" : "Ningguang", "code" : "5a07c26eff0f8999d32460518772f050","type":"Geo"},
+            {"id" : "48","name" : "Noelle", "code" : "3cc69dc622be9a7a8770d8c82656dd50","type":"Geo"},
+            {"id" : "49","name" : "Qiqi", "code" : "214448c1bfe8bec9c177f2b6f8239323","type":"Cryo"},
+            {"id" : "50","name" : "Raiden Shogun", "code" : "d4924e8f723a8deecae2277ad2991635","type":"Electro"},
+            {"id" : "51","name" : "Razor", "code" : "457acc5a54f3cc216df3d5d13cdbea47","type":"Electro"},
+            {"id" : "52","name" : "Rosaria", "code" : "7f9229226d57fcae4bf424a397cc2992","type":"Cryo"},
+            {"id" : "53","name" : "Kokomi", "code" : "17c7187ca6e0379a240329c21f205e16","type":"Hydro"},
+            {"id" : "54","name" : "Sayu", "code" : "e5992ab5d484206b3af15dc620ed20bf","type":"Anemo"},
+            {"id" : "55","name" : "Shenhe", "code" : "12bfc2ad2dfa67fc82aa289d61df2f81","type":"Cryo"},
+            {"id" : "56","name" : "Heizou", "code" : "96499e70b7f8c3761dae715b0aa9717e","type":"Anemo"},
+            {"id" : "57","name" : "Sucrose", "code" : "c403a0001469aed642f747166e9db86d","type":"Anemo"},
+            {"id" : "58","name" : "Tartaglia", "code" : "7c1e2c31325105791434c5f7c935ad25","type":"Hydro"},
+            {"id" : "59","name" : "Thoma", "code" : "67ca985b351adec7be85e6b27d5addf0","type":"Pyro"},
+            {"id" : "60","name" : "Tighnari", "code" : "c6ec94cc9948555320c56edcd90ee872","type":"Dendro"},
+            {"id" : "61","name" : "Venti", "code" : "b34ff0767052bb8ad80ffb217779ab0d","type":"Anemo"},
+            {"id" : "62","name" : "Wanderer", "code" : "1959337f29ea97d50167456c228d0728","type":"Anemo"},
+            {"id" : "63","name" : "Wriothesley", "code" : "755f1971fb844237ff6f32e24f914f04","type":"Cryo"},
+            {"id" : "64","name" : "Xiangling", "code" : "c993e4c989d5ca84de4bd69444e12820","type":"Pyro"},
+            {"id" : "65","name" : "Xiao", "code" : "0a58d770b97f453e4b32932407908929","type":"Anemo"},
+            {"id" : "66","name" : "Xingqiu", "code" : "0b122441310a27cecd4a67414eccfff5","type":"Hydro"},
+            {"id" : "67","name" : "Xinyan", "code" : "64a8c67e477c28ae35bb5bc008e50061","type":"Pyro"},
+            {"id" : "68","name" : "Yae Miko", "code" : "551035c0ad98120790eb273d8cdefeb1","type":"Electro"},
+            {"id" : "69","name" : "Yanfei", "code" : "48a145bf9c463d1812a02ec3705bacfd","type":"Pyro"},
+            {"id" : "70","name" : "Yaoyao", "code" : "b7df7786cc62a79673caaf03f49390f9","type":"Dendro"},
+            {"id" : "71","name" : "Yelan", "code" : "c53185788811865c9b4530ebc3e875fd","type":"Hydro"},
+            {"id" : "72","name" : "Yoimiya", "code" : "d7d33dabae4a735f04aeb2b37bf8a638","type":"Pyro"},
+            {"id" : "73","name" : "Yun Jin", "code" : "3ec6203ea1f5b8aa0a66f1509c07a449","type":"Geo"},
+            {"id" : "74","name" : "Zhongli", "code" : "e213e3dbc8ad64f00d6afe9c77d573fa","type":"Geo"},
+            {"id" : "75","name" : "Paimon", "code" : "a177f32cc6cf9f84233142c587200325","type":"None"},
+            {"id" : "76","name" : "Dainsleaf", "code" : "2af9ad65ac50cafebaeb1f5ea746ee8c","type":"None"},
+            {"id" : "77","name" : "Chevreuse", "code" : "219fee48a7e18157e271534fff120b64","type":"Pyro"},
+            {"id" : "78","name" : "Signora", "code" : "8ebb041bb9ef81a14ab3d342c6f967c0","type":"Pyro"},
+            {"id" : "79","name" : "Dottore", "code" : "ccb62515b0ccc1b7d02fc783a7f36a2c","type":"None"},
+            {"id" : "80","name" : "Lumine", "code" : "cc52e0256097cbfe7aa174425de1add8","type":"None"},
+            {"id" : "81","name" : "Aether", "code" : "165b6455d8ba65d1235791537b6b09e4","type":"None"},
+            {"id" : "82","name" : "GaMing", "code" : "2321faaf364b8e321bf47cef7cd41e25","type":"Pyro"},
+            {"id" : "83","name" : "Xianyun", "code" : "ddd2dfd1be508a982fcc0144f515b8c9","type":"Anemo"},
+            {"id" : "84","name" : "Arlecchino", "code" : "6a1ee4a2031857413bc36658a411b855","type":"None"},
+            {"id" : "85","name" : "Tsaritsa", "code" : "e133fa44f685094ed3e55b55d38ed660","type":"Cryo"},
+            {"id" : "86","name" : "Murata", "code" : "eb883823ee5faed3b118dacf9776b233","type":"Pyro"},
+            {"id" : "87","name" : "Clorinde", "code" : "84b34a0c86eb28e8f5fd1cad048477e1","type":"Electro"}
+
+        ]
+
+        let searchParams = new URLSearchParams(window.location.search);
+
+        let code = "";
+        if(searchParams.has('code')){
+            code = searchParams.get('code');
+        }
+
+        let cards = "";
+        if(searchParams.has('card')){
+            cards = searchParams.get('card');
+        }
+        debugger;
+        if(code != "" && cards != ""){
+            loadGame();
+        }else{
+            createNewGame();
+        }
+        
+        
+        function createNewGame(){
+            var deck = getDeck();
+
+            var chosen_card = getCharacter(deck);
+
+            var deck_code = '';
+
+            deck.forEach(element => {
+                deck_code += element.id +";";
+            });
+
+            $("#navbar").append("<span style='padding-right: 10px;'>Card code: "+chosen_card.code+";</span>");
+            $("#navbar").append("<span>Deck code: "+deck_code+" </span>");
+            $("#navbar").append("<span style='padding-left: 10%'><a style='padding: 10px 15px; font-size: 15px;' class='button' href='index.html'>Exit</a></span>");
+
+            var card = './src/cards/Card ('+ chosen_card.id + ').png'
+            $("#selected_card").append("<div class='row'><button class='card "+chosen_card.type+"'><img class='imagem' src='"+ card +"'>"+chosen_card.name+"</button><div>");
+ 
+        }
+
+        function loadGame(){
+            debugger;
+            var deck = loadDeck();
+
+            var chosen_card = getCharacter(deck);
+
+            debugger;
+
+            while (chosen_card.code == code){
+                chosen_card = getCharacter(deck);
+            };
+
+            var deck_code = '';
+
+            deck.forEach(element => {
+                deck_code += element.id +";";
+            });
+
+            $("#navbar").append("<span style='padding-right: 10px;'>Card code: "+chosen_card.code+";</span>");
+            $("#navbar").append("<span>Deck code: "+deck_code+" </span>");
+            $("#navbar").append("<span style='padding-left: 10%'><a style='padding: 10px 15px; font-size: 15px;' class='button' href='index.html'>Exit</a></span>");
+
+            var card = './src/cards/Card ('+ chosen_card.id + ').png'
+            $("#selected_card").append("<div class='row'><button class='card "+chosen_card.type+"'><img class='imagem' src='"+ card +"'>"+chosen_card.name+"</button><div>");
+
+        }
+
+        function getCharacter(deck){
+            let x = Math.floor(Math.random() * 32);
+            return deck[x];
+        }   
+
+        function getDeck(){
+            var table = $("#game-table");
+            var row = "";
+            var index_card = 0;
+            var chosen_deck = [];
+
+            debugger;
+            
+            for (let i = 0; i < 4; i++) {
+                row = "<div clas='row'>"
+                for (let j = 0; j < 8; j++) {
+                    let x = Math.floor(Math.random() * (characters_list.length));
+                    var selected = characters_list[x];
+                    chosen_deck.push(selected);
+                    characters_list.splice(x, 1);
+
+                    var card = './src/cards/Card ('+ selected.id + ').png'
+                    row += "<button class='card "+ selected.type + " '><img class='imagem' src='"+ card +"'>"+selected.name+"</button>"
+                    index_card ++;
+                }
+                row+="</div>"
+                table.append(row)
+            }
+
+            return chosen_deck;
+        }
+
+        function loadDeck(){
+            debugger;
+            var list_cards = cards.split(";");
+            var table = $("#game-table");
+            var row = "";
+            var chosen_deck = [];
+            var index_card = 0;
+
+            for (let i = 0; i < 4; i++) {
+                row = "<div clas='row'>"
+                for (let j = 0; j < 8; j++) {
+                    let x = list_cards[index_card] - 1;
+                    var selected = characters_list[x];
+                    chosen_deck.push(selected);
+
+                    var card = './src/cards/Card ('+ selected.id + ').png'
+                    row += "<button class='card "+ selected.type + " '><img class='imagem' src='"+ card +"'>"+selected.name+"</button>"
+                    index_card ++;
+                }
+                row+="</div>"
+                table.append(row)
+            }
+
+            return chosen_deck;
+        }
+
+        $(".card").on("click", function(){
+            var imagem = $(this).children("img");
+            if(imagem.hasClass("img-selected")){
+                if (imagem.hasClass("img-selected-disabled")){
+                    imagem.removeClass("img-selected-disabled");
+                }else{
+                    imagem.addClass("img-selected-disabled");
+                }
+            }else{
+                if (imagem.hasClass("img-disabled")){
+                    imagem.removeClass("img-disabled");
+                }else{
+                    imagem.addClass("img-disabled");
+                }
+            }
+            
+
+	    });
+
+        $("#exit").on("click", function(){
+            window.location.replace("index.html"); 
+        });
+
+    });
+
+
+</script>

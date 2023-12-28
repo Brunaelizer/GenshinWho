@@ -1,0 +1,112 @@
+body {
+    background-color: black;
+    font-family: 'Roboto';
+}
+
+
+h1 {
+    color: #fec000;
+    text-shadow: 0 0 2px black;
+}
+
+.container{
+    background-color: #00bff3;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    width: 60%;
+    height: 70%;
+    text-align: center;
+}
+
+.table{
+    background-color: #00bff3;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    width: 80%;
+    height: 90%;
+    text-align: center;
+}
+
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+
+a.menu{
+    background-color: red;
+    color: white;
+    text-decoration: none;
+    font-family: Roboto;
+    
+    border: none;
+}
+
+.button {
+    background-color: red;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px -3px #111;
+    color: white;
+    padding: 20px 34px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+    margin: 4px 2px;
+    cursor: pointer;
+  } 
+
+a.button:hover{
+    background-color: rgb(247, 78, 78);
+}
+
+button .img-disabled{
+	opacity: 0.1;
+}
+
+button .img-selected-disabled{
+	opacity: 0;
+}
+
+button.card {
+    width: 130px;
+    height: 160px;
+    background-repeat: no-repeat;
+}
+
+img{
+    margin: 0px;
+    width: 120px;
+    height: 120px;
+}
+
+button.Electro{
+    background-color: #b38dc1;
+}
+
+button.Hydro{
+    background-color: #5fc0f0;
+}
+
+button.Cryo{
+    background-color: #a1d3e2;
+}
+
+button.Dendro{
+    background-color: #9cc926;
+}
+
+button.Pyro{
+    background-color: #e87936;
+}
+
+button.Anemo{
+    background-color: #70c2a9;
+}
+
+button.Geo{
+    background-color: #f3b624;
+}
+
